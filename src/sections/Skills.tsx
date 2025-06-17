@@ -8,37 +8,43 @@ import { BorderBeam } from "@/components/border-beam";
 // Define skills with categories
 const skills = [
   {
-    category: "Frontend",
     items: [
       { name: "HTML5", level: 90 },
-      { name: "CSS3/SCSS", level: 85 },
+      { name: "CSS3", level: 85 },
+      { name: "Java", level: 80 },
       { name: "JavaScript", level: 90 },
       { name: "TypeScript", level: 85 },
+      { name: "Golang", level: 80 },
+      { name: "Python", level: 80 },
       { name: "React", level: 90 },
       { name: "Next.js", level: 85 },
       { name: "Tailwind CSS", level: 80 },
-    ],
-  },
-  {
-    category: "Backend",
-    items: [
       { name: "Node.js", level: 85 },
       { name: "Express", level: 80 },
-      { name: "MongoDB", level: 75 },
+      { name: "Hono", level: 80 },
+      { name: "Websocket", level: 80 },
+      { name: "GRPC", level: 80 },
+      { name: "Clerk", level: 80 },
+      { name: "NextAuth.js", level: 80 },
+      { name: "JWT", level: 80 },
+      { name: "Zod", level: 80 },
+      { name: "MySQL", level: 70 },
       { name: "PostgreSQL", level: 70 },
-      { name: "RESTful APIs", level: 85 },
-      { name: "GraphQL", level: 70 },
-    ],
-  },
-  {
-    category: "Tools & Others",
-    items: [
+      { name: "MongoDB", level: 75 },
+      { name: "Prisma", level: 80 },
       { name: "Git/GitHub", level: 85 },
       { name: "Docker", level: 70 },
-      { name: "AWS", level: 65 },
       { name: "Jest", level: 75 },
-      { name: "CI/CD", level: 70 },
-      { name: "Figma", level: 60 },
+      { name: "Pandas", level: 80 },
+      { name: "Numpy", level: 80 },
+      { name: "Matplotlib", level: 80 },
+      { name: "Seaborn", level: 80 },
+      { name: "Langchain", level: 80 },
+      { name: "Hugging face", level: 80 },
+      { name: "Scikit-learn", level: 80 },
+      { name: "Streamlit", level: 80 },
+      { name: "TensorFlow", level: 80 },
+      { name: "Keras", level: 80 }
     ],
   },
 ];
@@ -64,7 +70,7 @@ const techStack = [
 ];
 
 export default function Skills() {
-  const [selectedTech, setSelectedTech] = useState<string | null>(null);
+    const [selectedTech, setSelectedTech] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
@@ -184,21 +190,15 @@ export default function Skills() {
         <div className="space-y-16">
           {skills.map((skillGroup, index) => (
             <motion.div
-              key={skillGroup.category}
+              key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.2 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
               viewport={{ once: true, amount: 0.2 }}
               className={`transition-all duration-300`}
               style={{ display: 'block' }}
             >
-              <div className="flex items-center gap-4 mb-8">
-                {/* <div className="text-3xl">{skillGroup.icon}</div> */}
-                <h3 className="text-2xl font-bold">{skillGroup.category}</h3>
-                <div className="h-[1px] flex-grow bg-gradient-to-r from-border to-transparent"></div>
-              </div>
-
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6">
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-9 gap-6">
                 {skillGroup.items.map((skill) => (
                   <motion.div
                     key={skill.name}
@@ -264,22 +264,22 @@ export default function Skills() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 relative z-10">
               {[
-                "Redux",
-                "Material UI",
-                "Firebase",
-                "Vercel",
-                "Netlify",
-                "Webpack",
-                "Vite",
-                "Storybook",
-                "Cypress",
+                "Redis",
+                "AWS",
+                "Monorepo",
+                "Turborepo",
+                "CI/CD",
+                "Cloudflare",
                 "Strapi",
-              ].map((tech, index) => (
+                "Vercel",
+                // "Nginx",
+                // "Pm2",
+              ].map((tech) => (
                 <motion.div
                   key={tech}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  transition={{ delay: 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                   whileHover={{
                     scale: 1.05,

@@ -270,6 +270,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll down indicator */}
+      
         <motion.div
           className="absolute bottom-10 md:bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           initial={{ opacity: 0, y: -20 }}
