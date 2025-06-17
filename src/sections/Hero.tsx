@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -31,10 +32,9 @@ export default function Hero() {
 
   // Social media links
   const socialLinks = [
-    { icon: <Github size={20} />, url: "https://github.com/yourusername", color: "#333" },
-    { icon: <Linkedin size={20} />, url: "https://linkedin.com/in/yourusername", color: "#0077B5" },
-    { icon: <Twitter size={20} />, url: "https://twitter.com/yourusername", color: "#1DA1F2" },
-    { icon: <Instagram size={20} />, url: "https://instagram.com/yourusername", color: "#E1306C" },
+    { icon: <Github size={20} />, url: "https://github.com/sumamakhan761", color: "#333" },
+    { icon: <Linkedin size={20} />, url: "https://linkedin.com/in/sumama-khan", color: "#0077B5" },
+    { icon: <Twitter size={20} />, url: "https://twitter.com/sumamakhan761", color: "#1DA1F2" },
   ];
 
   return (
@@ -113,7 +113,7 @@ export default function Hero() {
             >
               <span className="block">Hi, I&apos;m</span>
               <span className="text-gradient bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-                John Doe
+                Sumama
               </span>
             </motion.h1>
 
@@ -124,7 +124,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="flex items-center">
-                <span className="mr-3">Full Stack Developer</span>
+                <span className="mr-3">Software Developer</span>
                 <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
               </div>
             </motion.h2>
@@ -211,25 +211,24 @@ export default function Hero() {
               }}
               transition={{ type: "spring", damping: 15 }}
             >
-              <div className="w-full h-full rounded-full overflow-hidden bg-card border-4 border-background">
+              <div className="w-full h-full rounded-full overflow-hidden bg-card border-4 border-background relative">
                 {/* Replace with your actual profile image */}
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-6xl font-bold text-primary/50">JD</span>
-                </div>
-                {/* Uncomment when you have an actual image
-                <Image
-                  src="/profile.jpg"
-                  alt="John Doe"
+                  {/* <span className="text-6xl font-bold text-primary/50">SK</span> */}
+                  <Image
+                  src="/profile.png"
+                  alt="Sumama"
                   fill
-                  className="object-cover"
+                  className="object-cover absolute top-0 left-0"
                 />
-                */}
+                </div>
+               
               </div>
             </motion.div>
 
             {/* Tech stack indicators */}
             <motion.div
-              className="absolute top-1/4 -left-4 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
+              className="absolute top-[7%] -left-4 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
               style={{ animationDelay: "0.5s" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -239,30 +238,40 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              className="absolute bottom-1/4 -right-4 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
-              style={{ animationDelay: "1s" }}
+              className="absolute top-[36%] -right-4 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
+              style={{ animationDelay: "0.5s" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <span className="text-primary font-bold">PY</span>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-1/4 -right-5 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
+              style={{ animationDelay: "0.5s" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
             >
               <span className="text-primary font-bold">TS</span>
             </motion.div>
 
             <motion.div
               className="absolute top-1/2 right-0 w-12 h-12 rounded-full bg-card border border-border flex items-center justify-center animate-float"
-              style={{ animationDelay: "1.5s" }}
+              style={{ animationDelay: "1s" }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
+              transition={{ delay: 1 }}
             >
-              <span className="text-primary font-bold">R</span>
+              <span className="text-primary font-bold">GO</span>
             </motion.div>
           </motion.div>
         </div>
 
         {/* Scroll down indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+          className="absolute bottom-10 md:bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.5 }}

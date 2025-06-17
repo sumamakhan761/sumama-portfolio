@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FileText, Calendar, Briefcase, GraduationCap, Award, ArrowRight } from "lucide-react";
+import { FileText, Calendar, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
 
 export default function About() {
   // Define animation variants
@@ -21,16 +21,6 @@ export default function About() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  // Personal info items
-  const personalInfo = [
-    { label: "Name", value: "John Doe" },
-    { label: "Age", value: "28 Years" },
-    { label: "Nationality", value: "American" },
-    { label: "Languages", value: "English, Spanish" },
-    { label: "Location", value: "San Francisco, CA" },
-    { label: "Freelance", value: "Available" },
-  ];
-
   // Key facts
   const keyFacts = [
     {
@@ -47,12 +37,7 @@ export default function About() {
       icon: <GraduationCap className="text-primary" size={24} />,
       count: "10+",
       text: "Technologies Mastered",
-    },
-    {
-      icon: <Award className="text-primary" size={24} />,
-      count: "8",
-      text: "Awards Received",
-    },
+    }
   ];
 
   return (
@@ -87,26 +72,26 @@ export default function About() {
             viewport={{ once: true, amount: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-square max-w-md mx-auto">
+            <div className="relative w-full aspect-square max-w-sm mx-auto flex mt-0 md:mt-24">
               {/* Image frame with gradient border */}
               <motion.div
                 className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary to-accent p-1 shadow-xl"
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="w-full h-full rounded-xl overflow-hidden bg-card">
+                <div className="w-full h-full rounded-xl overflow-hidden bg-card relative">
                   {/* Replace with your actual image */}
                   <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <span className="text-6xl font-bold text-primary/50">JD</span>
-                  </div>
-                  {/* Uncomment when you have an actual image
-                  <Image
-                    src="/profile-full.jpg"
-                    alt="John Doe"
+                    {/* <span className="text-6xl font-bold text-primary/50">SK</span> */}
+                    <Image
+                    src="/profile.png"
+                    alt="Sumama"
                     fill
-                    className="object-cover"
+                    className="object-cover absolute top-0 left-0"
                   />
-                  */}
+                  </div>
+                 
+                 
                 </div>
               </motion.div>
 
@@ -148,13 +133,13 @@ export default function About() {
           >
             <motion.div variants={itemVariants} className="space-y-4">
               <h3 className="text-2xl font-bold">Who am I?</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-[18px]">
                 I&apos;m a passionate Full Stack Developer with expertise in building
                 modern web applications. With a strong foundation in both frontend
                 and backend technologies, I create seamless digital experiences
                 that solve real-world problems.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-[18px]">
                 My journey in web development began 5 years ago, and since then,
                 I&apos;ve worked on a variety of projects ranging from small business
                 websites to complex enterprise applications. I&apos;m constantly
@@ -163,18 +148,7 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Personal Info Grid */}
-            <motion.div variants={itemVariants}>
-              <h3 className="text-xl font-bold mb-4">Personal Information</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {personalInfo.map((info, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <span className="text-primary font-medium">{info.label}:</span>
-                    <span className="text-muted-foreground">{info.value}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+           
 
             {/* Key Facts */}
             <motion.div variants={itemVariants} className="pt-6">
