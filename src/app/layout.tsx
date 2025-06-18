@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Your Name",
+  title: "Sumama khan",
   description: "Personal portfolio website showcasing my work and skills",
-  keywords: ["portfolio", "web developer", "frontend", "backend", "full stack"],
-  authors: [{ name: "Your Name" }],
+  keywords: ["portfolio", "web developer", "frontend", "backend", "full stack", "Typescript", "JavaScript", "Python", "Golang", "Java", "AI/ML", "Prompt Engineering", "LLM Training", "Fine-Tuning"],
+  authors: [{ name: "Sumama khan" }],
 };
 
 export default function RootLayout({

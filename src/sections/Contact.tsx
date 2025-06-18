@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, Phone, MapPin, Check, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Send, Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
 import { BorderBeam } from "../components/border-beam";
 
 export default function Contact() {
@@ -11,8 +11,15 @@ export default function Contact() {
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const socialLinks = [
+    { icon: <Github size={20} />, url: "https://github.com/sumamakhan761", color: "#333" },
+    { icon: <Linkedin size={20} />, url: "https://linkedin.com/in/sumama-khan", color: "#0077B5" },
+    { icon: <Twitter size={20} />, url: "https://twitter.com/sumamakhan761", color: "#1DA1F2" },
+  ];
+
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeField, setActiveField] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -23,52 +30,46 @@ export default function Contact() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      });
+  //   try {
+  //     const response = await fetch("/api/contact", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formState),
+  //     });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormState({ name: "", email: "", message: "" });
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      } else {
-        console.error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (response.ok) {
+  //       setIsSubmitted(true);
+  //       setFormState({ name: "", email: "", message: "" });
+  //       setTimeout(() => {
+  //         setIsSubmitted(false);
+  //       }, 5000);
+  //     } else {
+  //       console.error("Form submission failed");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const contactMethods = [
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      value: "hello@example.com",
+      value: "sumamakhan800@gmail.com",
       delay: 0.1,
-    },
-    {
-      icon: <Phone className="h-6 w-6" />,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      delay: 0.2,
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Location",
-      value: "San Francisco, CA",
+      value: "Mumbai, India",
       delay: 0.3,
     },
   ];
@@ -119,7 +120,7 @@ export default function Contact() {
             className="relative"
           >
             <div className="bg-background border border-border rounded-lg p-8 relative overflow-hidden">
-              <AnimatePresence>
+              {/* <AnimatePresence>
                 {isSubmitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -141,10 +142,10 @@ export default function Contact() {
                     </p>
                   </motion.div>
                 ) : null}
-              </AnimatePresence>
+              </AnimatePresence> */}
 
               <h3 className="text-xl font-bold mb-6">Send Me a Message</h3>
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef}className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Your Name
@@ -240,28 +241,27 @@ export default function Contact() {
 
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting}
                   className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg flex items-center justify-center gap-2 relative overflow-hidden"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {isSubmitting ? (
+                  {/* {isSubmitting ? (
                     <>
                       <Loader2 className="h-5 w-5 animate-spin" />
                       <span>Sending...</span>
                     </>
-                  ) : (
-                    <>
+                  ) : ( */}
+                    {/* <> */}
                       <Send className="h-5 w-5" />
                       <span>Send Message</span>
-                    </>
-                  )}
-                  <motion.span
+                    {/* </> */}
+                  {/* )} */}
+                  {/* <motion.span
                     className="absolute bottom-0 left-0 h-1 bg-accent"
                     initial={{ width: 0 }}
                     animate={isSubmitting ? { width: "100%" } : { width: 0 }}
                     transition={{ duration: 2 }}
-                  />
+                  /> */}
                 </motion.button>
               </form>
             </div>
@@ -303,66 +303,50 @@ export default function Contact() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="bg-background border border-border rounded-lg p-8"
+              className="flex items-center gap-4 pt-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
             >
-              <h3 className="text-xl font-bold mb-6">Connect With Me</h3>
-              <div className="flex flex-wrap gap-4">
-                {["github", "linkedin", "twitter", "instagram"].map(platform => (
+              <span className="text-sm text-muted-foreground">Follow me:</span>
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
                   <motion.a
-                    key={platform}
-                    href={`https://${platform}.com`}
+                    key={index}
+                    href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-card hover:bg-primary/10 rounded-full text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
+                    className="p-2 bg-card hover:bg-primary/10 rounded-full transition-colors border border-border"
+                    whileHover={{
+                      scale: 1.2,
+                      backgroundColor: `${social.color}20`,
+                      boxShadow: `0 0 10px ${social.color}40`
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.1 }}
                   >
-                    <span className="sr-only">{platform}</span>
-                    <svg
-                      className="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      {/* This is a placeholder. You should replace with actual SVG paths for each platform */}
-                      <rect width="24" height="24" fillOpacity="0" />
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                    </svg>
+                    {social.icon}
                   </motion.a>
                 ))}
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg p-8 text-center"
-            >
-              <h3 className="text-xl font-bold mb-4">Ready to Start a Project?</h3>
-              <p className="mb-6 text-muted-foreground">
-                I&apos;m currently available for freelance work and exciting opportunities.
-              </p>
-              <motion.a
-                href="#"
-                className="inline-flex items-center px-6 py-3 bg-background text-foreground rounded-lg border border-border"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 0 20px rgba(139, 92, 246, 0.3)"
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View My Schedule
-              </motion.a>
-            </motion.div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg p-8 text-center"
+          >
+            <h3 className="text-xl font-bold mb-4">Ready to Start a Project?</h3>
+            <p className="mb-6 text-muted-foreground">
+              I&apos;m currently Open to Work.
+            </p>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </div>
+    </section >
   );
 } 

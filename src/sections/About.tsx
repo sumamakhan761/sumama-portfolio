@@ -25,18 +25,23 @@ export default function About() {
   const keyFacts = [
     {
       icon: <Calendar className="text-primary" size={24} />,
-      count: "5+",
+      count: "1.5+",
       text: "Years of Experience",
     },
     {
       icon: <Briefcase className="text-primary" size={24} />,
-      count: "50+",
+      count: "20+",
       text: "Projects Completed",
     },
     {
       icon: <GraduationCap className="text-primary" size={24} />,
-      count: "10+",
-      text: "Technologies Mastered",
+      count: "20+",
+      text: "Technologies ",
+    },
+    {
+      icon: <GraduationCap className="text-primary" size={24} />,
+      count: "600+",
+      text: "DSA Problems",
     }
   ];
 
@@ -84,14 +89,14 @@ export default function About() {
                   <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                     {/* <span className="text-6xl font-bold text-primary/50">SK</span> */}
                     <Image
-                    src="/profile.png"
-                    alt="Sumama"
-                    fill
-                    className="object-cover absolute top-0 left-0"
-                  />
+                      src="/profile.png"
+                      alt="Sumama"
+                      fill
+                      className="object-cover absolute top-0 left-0"
+                    />
                   </div>
-                 
-                 
+
+
                 </div>
               </motion.div>
 
@@ -134,21 +139,14 @@ export default function About() {
             <motion.div variants={itemVariants} className="space-y-4">
               <h3 className="text-2xl font-bold">Who am I?</h3>
               <p className="text-muted-foreground text-[18px]">
-                I&apos;m a passionate Full Stack Developer with expertise in building
-                modern web applications. With a strong foundation in both frontend
-                and backend technologies, I create seamless digital experiences
-                that solve real-world problems.
+                I&apos;m a passionate Software Development with robust expertise in Data Structures and Algorithms (DSA) using Java,  golang and other languages. over 1.5-year of hands-on experience gained through building and deploying multiple projects in Full Stack development, AI/ML. I have solved more then 600 DSA problems, which has sharpened my problem-solving skills and enabled me to design efficient, scalable solutions.
               </p>
               <p className="text-muted-foreground text-[18px]">
-                My journey in web development began 5 years ago, and since then,
-                I&apos;ve worked on a variety of projects ranging from small business
-                websites to complex enterprise applications. I&apos;m constantly
-                learning and adapting to new technologies to stay at the forefront
-                of web development.
+              My technical skills span across the entire software development lifecycle.I am continuously learning and experimenting with emerging technologies.
               </p>
             </motion.div>
 
-           
+
 
             {/* Key Facts */}
             <motion.div variants={itemVariants} className="pt-6">

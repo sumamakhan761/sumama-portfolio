@@ -7,9 +7,22 @@ import Image from "next/image";
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [windowDimensions, setWindowDimensions] = useState({ width: 0, height: 0 });
+  const [isClient, setIsClient] = useState(false);
+
+  // Set isClient to true when component mounts
+  useEffect(() => {
+    setIsClient(true);
+    setWindowDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }, []);
 
   // Track mouse position for parallax effect
   useEffect(() => {
+    if (!isClient) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({
         x: e.clientX,
@@ -17,16 +30,28 @@ export default function Hero() {
       });
     };
 
+    const handleResize = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isClient]);
 
   // Calculate parallax movement
   const calculateParallax = (depth: number = 20) => {
-    const x = (window.innerWidth / 2 - mousePosition.x) / depth;
-    const y = (window.innerHeight / 2 - mousePosition.y) / depth;
+    if (!isClient) return { x: 0, y: 0 };
+
+    const x = (windowDimensions.width / 2 - mousePosition.x) / depth;
+    const y = (windowDimensions.height / 2 - mousePosition.y) / depth;
     return { x, y };
   };
 
@@ -135,9 +160,11 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              I build modern web applications with cutting-edge technologies.
-              Passionate about creating beautiful, functional, and user-friendly
-              digital experiences.
+              I build modern full stack applications with cutting-edge technologies.
+              Integrated with AI/ML to enhance user experience.
+              Backed by a strong foundation in DSA and practical AI/ML expertise.
+              Always try to solve Something new and interesting and contributing to open source projects.
+
             </motion.p>
 
             <motion.div
@@ -216,13 +243,13 @@ export default function Hero() {
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                   {/* <span className="text-6xl font-bold text-primary/50">SK</span> */}
                   <Image
-                  src="/profile.png"
-                  alt="Sumama"
-                  fill
-                  className="object-cover absolute top-0 left-0"
-                />
+                    src="/profile.png"
+                    alt="Sumama"
+                    fill
+                    className="object-cover absolute top-0 left-0"
+                  />
                 </div>
-               
+
               </div>
             </motion.div>
 
@@ -270,7 +297,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll down indicator */}
-      
+
         <motion.div
           className="absolute bottom-10 md:bottom-0 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
           initial={{ opacity: 0, y: -20 }}

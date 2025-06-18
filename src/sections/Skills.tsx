@@ -52,25 +52,23 @@ const skills = [
 // Tech stack for the rotating wheel
 const techStack = [
   { name: "JavaScript", icon: "/tech/javascript.svg", color: "#F7DF1E" },
+  { name: "Typescript", icon: "/tech/typescript.svg", color: "#3178C6" },
+  { name: "Java", icon: "/tech/java.svg", color: "#007396" },
+  { name: "Golang", icon: "/tech/golang.svg", color: "#00ADD8" },
+  { name: "Python", icon: "/tech/python.svg", color: "#3776AB" },
+  { name: "Next.js", icon: "/tech/nextjs.svg", color: "#ffffff" },
   { name: "React", icon: "/tech/react.svg", color: "#61DAFB" },
+  { name: "Tailwind CSS", icon: "/tech/tailwindcss.svg", color: "#06B6D4" },
   { name: "Node.js", icon: "/tech/nodejs.svg", color: "#339933" },
-  { name: "TypeScript", icon: "/tech/typescript.svg", color: "#3178C6" },
-  { name: "MongoDB", icon: "/tech/mongodb.svg", color: "#47A248" },
-  { name: "HTML5", icon: "/tech/html5.svg", color: "#E34F26" },
-  { name: "CSS3", icon: "/tech/css3.svg", color: "#1572B6" },
-  { name: "Next.js", icon: "/tech/nextjs.svg", color: "#000000" },
-  { name: "GraphQL", icon: "/tech/graphql.svg", color: "#E10098" },
+  { name: "PostgreSQL", icon: "/tech/postgresql.svg", color: "#336791" },
+  { name: "Prisma", icon: "/tech/prisma.svg", color: "#ffffff" },
   { name: "Docker", icon: "/tech/docker.svg", color: "#2496ED" },
   { name: "AWS", icon: "/tech/aws.svg", color: "#FF9900" },
-  { name: "Firebase", icon: "/tech/firebase.svg", color: "#FFCA28" },
-  { name: "Redux", icon: "/tech/redux.svg", color: "#764ABC" },
-  { name: "Tailwind CSS", icon: "/tech/tailwindcss.svg", color: "#06B6D4" },
-  { name: "Git", icon: "/tech/git.svg", color: "#F05032" },
-  { name: "PostgreSQL", icon: "/tech/postgresql.svg", color: "#336791" },
+  { name: "Turborepo", icon: "/tech/turborepo.svg", color: "#ffffff" }
 ];
 
 export default function Skills() {
-    const [selectedTech, setSelectedTech] = useState<string | null>(null);
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [rotationAngle, setRotationAngle] = useState(0);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
@@ -186,7 +184,7 @@ export default function Skills() {
           })}
         </motion.div>
 
-         {/* Creative Skill Cards with BorderBeam */}
+        {/* Creative Skill Cards with BorderBeam */}
         <div className="space-y-16">
           {skills.map((skillGroup, index) => (
             <motion.div

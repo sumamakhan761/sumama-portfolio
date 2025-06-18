@@ -8,33 +8,23 @@ import { BorderBeam } from "../components/border-beam";
 // Define experience data
 const experiences = [
   {
-    title: "Senior Frontend Developer",
-    company: "Tech Innovations Inc.",
-    location: "San Francisco, CA",
-    period: "Jan 2021 - Present",
-    description:
-      "Lead the frontend development team in building and maintaining modern web applications using React, Next.js, and TypeScript. Implemented CI/CD pipelines, improved performance by 40%, and mentored junior developers.",
-    skills: ["React", "Next.js", "TypeScript", "CI/CD", "Team Leadership"],
-    color: "#9c40ff"
-  },
-  {
     title: "Full Stack Developer",
-    company: "Digital Solutions Ltd.",
-    location: "New York, NY",
-    period: "Mar 2018 - Dec 2020",
+    company: "MESCO Trust",
+    location: "Mumbai, India",
+    period: "May 2024 - Present",
     description:
-      "Developed and maintained full-stack web applications using the MERN stack. Collaborated with designers and product managers to deliver high-quality features on time. Improved database performance and implemented RESTful APIs.",
-    skills: ["React", "Node.js", "MongoDB", "Express", "RESTful APIs"],
+      "I designed and developed a modern NGO website featuring responsive design, dynamic routing, and optimized load times. I integrated Strapi CMS with a custom service layer to enable dynamic content management and RESTful API handling. By implementing code-splitting, lazy loading, and custom caching, I reduced the website's bundle size by 60% and API calls by 70%. I added a Razorpay payment gateway and a chatbot for FAQs to enhance user experience and support. Finally, I ensured scalable deployment and real-time monitoring using PM2, Nginx, and Cloudflare.",
+    skills: ["Typescript", "React", "Node.js", "Strapi", "Razorpay", "PostgreSQL", "Cloudefare", "Nginx", "Pm2"],
     color: "#40a9ff"
   },
   {
-    title: "Junior Web Developer",
-    company: "WebCraft Agency",
-    location: "Boston, MA",
-    period: "Jun 2016 - Feb 2018",
+    title: "AI Engineer",
+    company: "Outlier",
+    location: "Remote",
+    period: "Dec 2024 - June 2025",
     description:
-      "Created responsive websites for clients across various industries. Worked with HTML, CSS, JavaScript, and WordPress. Participated in client meetings and implemented feedback effectively.",
-    skills: ["HTML/CSS", "JavaScript", "WordPress", "Responsive Design"],
+      "As a freelancer, worked on 5+ projects for AI-related companies, utilizing Python, SQL, and prompt engineering. Developed and optimized prompts for generative AI models to enhance output quality. Gained hands-on experience with LLM training and prompt engineering.",
+    skills: ["Python", "SQL", "Prompt Engineering", "LLM Training", "Generative AI"],
     color: "#ffaa40"
   },
 ];
@@ -87,7 +77,7 @@ export default function Experience() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true, amount: 0.2 }}
               className={`relative mb-12 md:mb-24 ${index % 2 === 0
-                ? "md:text-right md:pr-12 md:mr-auto md:ml-0"
+                ? "md:text-left md:pr-12 md:mr-auto md:ml-0"
                 : "md:text-left md:pl-12 md:ml-auto md:mr-0"
                 } md:w-1/2`}
               onMouseEnter={() => setHoveredCard(index)}

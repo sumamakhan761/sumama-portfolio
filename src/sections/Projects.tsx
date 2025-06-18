@@ -1,140 +1,163 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, Code, Layers, Database, Monitor } from "lucide-react";
 import Image from "next/image";
 
+// Define Project interface
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  category: string;
+  liveLink: string;
+  githubLink: string;
+  features: string[];
+  color: string;
+}
+
 // Define project data
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "SafeReport",
     description:
-      "A full-featured e-commerce platform with product listings, cart functionality, user authentication, and payment processing.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
+      "A secure, full-stack web application for anonymous crime reporting, designed to protect user privacy and facilitate quick incident submission.",
+    image: "/project/safereport.png", // Replace with actual project image
+    technologies: ["Next.js", "GeminiAI", "Mapbox", "TypeScript", "TailwindCSS", "Postgres", "Prisma"],
     category: "Full Stack",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
+    liveLink: "https://crime-report-eight.vercel.app/",
+    githubLink: "https://github.com/sumamakhan761/crime-report",
     features: [
-      "User authentication and authorization",
-      "Product search and filtering",
-      "Shopping cart and checkout process",
-      "Payment processing with Stripe",
-      "Order history and tracking",
-      "Admin dashboard for product management"
+      "Modern, responsive UI with Mapbox geolocation tracking",
+      "Gemini AI integration for smart incident detection from images and auto-generated report content",
+      "Unique report IDs for user tracking and status updates (pending/resolved/rejected)",
+      "Secure, role-based admin dashboard and a blog for emergency awareness"
     ],
     color: "#6d28d9"
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "WireCode",
     description:
-      "A responsive task management application with drag-and-drop functionality, user authentication, and real-time updates.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["React", "Firebase", "Tailwind CSS", "React DnD"],
-    category: "Frontend",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
+      "A full-stack web app that transforms wireframe images into responsive React + Tailwind components using AI.",
+    image: "/project/wireframe.png", // Updated path
+    technologies: ["Next.js", "TypeScript", "TailwindCSS", "Postgres", "FireBase", "Blob", "OpenRouter.ai", "Sandpack"],
+    category: "Full Stack",
+    githubLink: "https://github.com/sumamakhan761/wirecode",
+    liveLink: "https://wirecode.vercel.app/",
     features: [
-      "Drag-and-drop task organization",
-      "Real-time updates with Firebase",
-      "Task categorization and filtering",
-      "Due date reminders and notifications",
-      "Team collaboration features",
-      "Dark/light theme toggle"
+      "AI-powered wireframe-to-code conversion via OpenRouter",
+      "Firebase Auth, Drizzle ORM, and Vercel Blob for secure user, image, and code storage",
+      "Real-time, streamed code generation with live editing (Sandpack)",
+      "Conversion history tracking and a credit-based usage syste"
     ],
     color: "#8b5cf6"
   },
   {
     id: 3,
-    title: "Social Media Dashboard",
+    title: "Resume Builder",
     description:
-      "An analytics dashboard for social media managers with data visualization, reporting, and scheduling features.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["Next.js", "TypeScript", "Chart.js", "Tailwind CSS"],
-    category: "Frontend",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
+      "A full-stack, ATS-friendly resume builder for seamless resume creation and management.",
+    image: "/project/resumeBuilder.png", // Updated path
+    technologies: ["Next.js", "TypeScript", "TailwindCSS", "JavaScript", "Postgres", "Prisma", "Clerk", "Dnd-kit"],
+    category: "Full Stack",
+    liveLink: "https://resume-builder-six-blush.vercel.app/",
+    githubLink: "https://github.com/sumamakhan761/resume-builder",
     features: [
-      "Real-time analytics visualization",
-      "Custom date range reporting",
-      "Content scheduling and calendar view",
-      "Performance metrics comparison",
-      "Audience demographics analysis",
-      "Export reports as PDF or CSV"
+      "Live form editing with real-time preview",
+      "Drag-and-drop section reordering (dnd-kit) for personalized layouts",
+      "Clerk for secure user authentication",
+      "Professional PDF export and cross-device compatibility"
     ],
     color: "#4c1d95"
   },
   {
     id: 4,
-    title: "Booking System API",
+    title: "Build Own Cache",
     description:
-      "A RESTful API for a booking system with authentication, authorization, and resource management.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["Node.js", "Express", "PostgreSQL", "JWT"],
+      "A Redis-compatible in-memory cache server implemented in Go that provides basic key-value storage functionality with concurrent client handling",
+    image: "/project/cache.png", // Updated path
+    technologies: ["Go", "Redis"],
     category: "Backend",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
+    liveLink: "deepwiki.com/sumamakhan761/Build-Own-Cache/",
+    githubLink: "https://github.com/sumamakhan761/Build-Own-Cache",
     features: [
-      "JWT authentication and role-based access",
-      "Resource availability checking",
-      "Booking creation and management",
-      "Email notifications for bookings",
-      "Rate limiting and request validation",
-      "Comprehensive API documentation"
+      "Basic key-value storage functionality with concurrent client handling",
+      "Each client connection runs in its own goroutine",
+      "Uses Go channels for thread-safe message passing between components",
+      "In-memory storage with automatic eviction of expired items",
+      "Support for basic commands like GET, SET, DEL",
+    ],
+    color: "#0000FF"
+  },
+  {
+    id: 5,
+    title: "Zentry",
+    description:
+      "Build a visually captivating website inspired by Zentry, featuring scroll-triggered animations, geometric transitions, and engaging video storytelling.",
+    image: "/project/zentry.png", // Updated path
+    technologies: ["React", "TailwindCSS", "JavaScript", "TypeScript"],
+    category: "Frontend",
+    liveLink: "https://zentry-web.onrender.com",
+    githubLink: "https://github.com/sumamakhan761/zentry-web3",
+    features: [
+      "Scroll-triggered animations and geometric transitions",
+      "Engaging video storytelling with smooth transitions",
+      "Responsive design for optimal viewing on all devices",
+      "Focusing on engaging UI/UX and smooth responsiveness",
+      "Using Framer Motion for smooth animations and transitions",
     ],
     color: "#047857"
   },
   {
-    id: 5,
-    title: "Weather App",
-    description:
-      "A weather application that provides current conditions and forecasts based on user location or search.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["React", "OpenWeather API", "Geolocation API"],
-    category: "Frontend",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
-    features: [
-      "Current weather conditions display",
-      "5-day forecast with hourly breakdowns",
-      "Location-based weather using geolocation",
-      "Search for weather by city or zip code",
-      "Weather alerts and notifications",
-      "Animated weather icons and backgrounds"
-    ],
-    color: "#0284c7"
-  },
-  {
     id: 6,
-    title: "Blog Platform",
+    title: "Brain Tumor Detection",
     description:
-      "A content management system for blogs with rich text editing, categories, and user management.",
-    image: "/placeholder.jpg", // Replace with actual project image
-    technologies: ["Next.js", "Sanity.io", "Tailwind CSS"],
-    category: "Full Stack",
-    liveLink: "https://example.com",
-    githubLink: "https://github.com/yourusername/project",
+      "Developed a deep learning model to detect and classify brain tumors from MRI scans, enhancing diagnostic accuracy and efficiency. The system processes medical images through preprocessing and advanced analysis to provide reliable predictions.",
+    image: "/project/brainTumor.png", // Updated path
+    technologies: ["Python", "TensorFlow", "Keras", "Scikit-learn", "OpenCV", "Matplotlib", "Seaborn", "Pandas", "Numpy"],
+    category: "AI/ML",
+    liveLink: "https://github.com/sumamakhan761/Brain-tumor-classification",
+    githubLink: "https://github.com/sumamakhan761/Brain-tumor-classification",
     features: [
-      "Rich text editor with markdown support",
-      "Content categorization and tagging",
-      "User authentication and role management",
-      "SEO optimization features",
-      "Comment system with moderation",
-      "Analytics dashboard for content performance"
+      "Preprocessing Pipeline: Cropping, resizing, and data augmentation to optimize model performance and robustness",
+      "Grad-CAM Integration: Visualizes tumor locations by highlighting affected areas in MRI scans for interpretable diagnostics",
+      "Multi-Tool Framework: Leveraged TensorFlow for model training, OpenCV for image processing, and Scikit-learn for feature extraction and analysis",
+      "Rigorous Validation: Evaluated using accuracy metrics, confusion matrices, and classification reports to ensure clinically viable predictions"
     ],
     color: "#b91c1c"
+  },
+  {
+    id: 7,
+    title: "Chat with SQL Database",
+    description:
+      "Developed an interactive chatbot that allows users to query SQL databases using natural language, streamlining data access and analysis for non-technical users. The application links Python, Streamlit, LangChain, GroqAI, MySQL, and NLP technologies to deliver a seamless, secure, and efficient user experience.",
+    image: "/project/chatsql.png", // Updated path
+    technologies: ["Python", "Streamlit", "LangChain", "GroqAI", "MySQL", "NLP"],
+    category: "AI/ML",
+    liveLink: "https://github.com/sumamakhan761/database-helper",
+    githubLink: "https://github.com/sumamakhan761/database-helper",
+    features: [
+      "Natural Language to SQL: Uses LangChain's SQL Agent and Groq's AI models to translate user-friendly English queries into efficient SQL commands.",
+      "Dynamic Database Configuration: Supports seamless switching between local SQLite and remote MySQL databases.",
+      "Secure Authentication: Implements API key validation and secure credential inputs to protect data privacy.",
+      "Performance Optimization: Built-in caching mechanism reduces query latency and enhances database performance.",
+      "User-Friendly Interface: Developed with Streamlit for an intuitive, interactive chatbot experience."
+    ],
+    color: "#0000FF"
   },
 ];
 
 // Define categories for filtering
-const categories = ["All", "Frontend", "Backend", "Full Stack"];
+const categories = ["All", "Frontend", "Backend", "Full Stack", "AI/ML"];
 
 export default function Projects() {
   const [filter, setFilter] = useState("All");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -146,16 +169,28 @@ export default function Projects() {
       : projects.filter((project) => project.category === filter);
 
   // Handle project click for modal
-  const openProjectModal = (project) => {
+  const openProjectModal = (project: Project) => {
     setSelectedProject(project);
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
   };
 
   // Close modal
   const closeProjectModal = () => {
     setSelectedProject(null);
-    document.body.style.overflow = "auto"; // Re-enable scrolling
   };
+
+  // Handle document body overflow when modal opens/closes
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    } else {
+      document.body.style.overflow = "auto"; // Re-enable scrolling
+    }
+
+    // Cleanup function to ensure we re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
 
   // Get category icon
   const getCategoryIcon = (category: string) => {
@@ -190,7 +225,7 @@ export default function Projects() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Here are some of my recent projects. Click on a project to learn more.
+            Here are some of my few recent projects. Click on a project to learn more.
           </p>
         </motion.div>
 
@@ -207,8 +242,8 @@ export default function Projects() {
               key={category}
               onClick={() => setFilter(category)}
               className={`px-6 py-2 rounded-full transition-colors ${filter === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-card hover:bg-primary/20 text-foreground"
+                ? "bg-primary text-primary-foreground"
+                : "bg-card hover:bg-primary/20 text-foreground"
                 }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -240,13 +275,17 @@ export default function Projects() {
                 onClick={() => openProjectModal(project)}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
-                ref={el => projectRefs.current[index] = el}
+                ref={(el) => {
+                  if (el) {
+                    projectRefs.current[index] = el;
+                  }
+                }}
                 style={{
                   boxShadow: hoveredProject === project.id ? `0 10px 25px ${project.color}30` : undefined
                 }}
               >
-                <div className="h-48 bg-muted relative overflow-hidden">
-                  {/* Project Image Placeholder with gradient overlay */}
+                <div className="h-48 bg-muted relative overflow-hidden p-20">
+                  {/* Project Image with gradient overlay */}
                   <div
                     className="absolute inset-0 flex items-center justify-center bg-gradient-to-br"
                     style={{
@@ -266,14 +305,12 @@ export default function Projects() {
                     </motion.div>
                   </div>
 
-                  {/* Uncomment when you have actual images
-                  <Image
+                 <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover"
+                    className="object-cover px-7 pt-7"
                   />
-                  */}
 
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center">
@@ -340,7 +377,7 @@ export default function Projects() {
                 }}
               >
                 <div className="h-64 bg-muted relative">
-                  {/* Project Image Placeholder with gradient overlay */}
+                  {/* Project Image with gradient overlay */}
                   <div
                     className="absolute inset-0 flex items-center justify-center"
                     style={{
@@ -352,14 +389,13 @@ export default function Projects() {
                     </span>
                   </div>
 
-                  {/* Uncomment when you have actual images
+                  {/* Project Image */}
                   <Image
                     src={selectedProject.image}
                     alt={selectedProject.title}
                     fill
                     className="object-cover"
                   />
-                  */}
                 </div>
 
                 <div className="p-8">
@@ -387,6 +423,7 @@ export default function Projects() {
                       >
                         <Github size={20} />
                       </motion.a>
+
                       <motion.a
                         href={selectedProject.liveLink}
                         target="_blank"
