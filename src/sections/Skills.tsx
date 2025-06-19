@@ -254,7 +254,61 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Rest of the component... */}
+        {/* Redesigned Other Technologies section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-16"
+        >
+          <h3 className="text-2xl font-bold mb-8 text-center">Other Technologies</h3>
+
+          <div className="relative p-8 bg-card rounded-xl border border-border overflow-hidden">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 z-0"></div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 relative z-10">
+              {[
+                "Redis",
+                "AWS",
+                "Monorepo",
+                "Turborepo",
+                "CI/CD",
+                "Cloudflare",
+                "Strapi",
+                "Vercel",
+                // "Nginx",
+                // "Pm2",
+              ].map((tech) => (
+                <motion.div
+                  key={tech}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 10px 25px -5px rgba(139, 92, 246, 0.3)",
+                    y: -5
+                  }}
+                  className="bg-background p-4 rounded-lg border border-border flex flex-col items-center justify-center text-center h-24 shadow-sm"
+                >
+                  <motion.div
+                    className="w-8 h-8 mb-2 bg-primary/20 rounded-full flex items-center justify-center"
+                    animate={{ rotate: [0, 10, 0, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  >
+                    <span className="text-primary text-sm font-bold">
+                      {tech.charAt(0)}
+                    </span>
+                  </motion.div>
+                  <span className="font-medium">{tech}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
