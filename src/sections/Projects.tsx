@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, Code, Layers, Database, Monitor } from "lucide-react";
+import { Github, ExternalLink, Code, Layers, Database, Monitor, X } from "lucide-react";
 import Image from "next/image";
 
 // Define Project interface
@@ -80,7 +80,7 @@ const projects: Project[] = [
     title: "Build Own Cache",
     description:
       "A Redis-compatible in-memory cache server implemented in Go that provides basic key-value storage functionality with concurrent client handling",
-    image: "/project/cache.png", // Updated path
+    image: "/cache.png",
     technologies: ["Go", "Redis"],
     category: "Backend",
     liveLink: "deepwiki.com/sumamakhan761/Build-Own-Cache/",
@@ -159,8 +159,26 @@ export default function Projects() {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Set isClient to true when component mounts and check for mobile
+  useEffect(() => {
+    setIsClient(true);
+
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkIsMobile();
+
+    // Add resize listener
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   // Filter projects based on selected category
   const filteredProjects =
@@ -180,6 +198,8 @@ export default function Projects() {
 
   // Handle document body overflow when modal opens/closes
   useEffect(() => {
+    if (!isClient) return;
+
     if (selectedProject) {
       document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
     } else {
@@ -190,7 +210,7 @@ export default function Projects() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [selectedProject]);
+  }, [selectedProject, isClient]);
 
   // Get category icon
   const getCategoryIcon = (category: string) => {
@@ -305,11 +325,15 @@ export default function Projects() {
                     </motion.div>
                   </div>
 
-                 <Image
+                  <Image
                     src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover px-7 pt-7"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 3}
+                    loading={index < 3 ? "eager" : "lazy"}
+                    quality={80}
                   />
 
                   {/* Category badge */}
@@ -362,7 +386,7 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 mt-10 md:mt-0"
               onClick={closeProjectModal}
             >
               <motion.div
@@ -370,12 +394,25 @@ export default function Projects() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", damping: 20 }}
-                className="bg-card w-full max-w-4xl rounded-lg shadow-xl overflow-hidden"
+                className="bg-card w-full max-w-4xl rounded-lg shadow-xl overflow-hidden max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
                 style={{
                   boxShadow: `0 10px 30px ${selectedProject.color}40`
                 }}
               >
+                {/* Close button for mobile */}
+                {isMobile && (
+                  <div className="sticky top-0 right-0 z-10 flex justify-end p-2 bg-card/80 backdrop-blur-sm">
+                    <button
+                      onClick={closeProjectModal}
+                      className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                      aria-label="Close modal"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  </div>
+                )}
+
                 <div className="h-64 bg-muted relative">
                   {/* Project Image with gradient overlay */}
                   <div
@@ -395,11 +432,14 @@ export default function Projects() {
                     alt={selectedProject.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    quality={85}
+                    priority
                   />
                 </div>
 
                 <div className="p-8">
-                  <div className="flex justify-between items-start mb-6">
+                  <div className="flex justify-between items-start mb-6 flex-wrap gap-4">
                     <div>
                       <h3 className="text-2xl font-bold">
                         {selectedProject.title}

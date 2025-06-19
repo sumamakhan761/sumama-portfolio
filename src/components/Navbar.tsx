@@ -82,11 +82,26 @@ export default function Navbar() {
 
     const element = document.getElementById(sectionId);
     if (element) {
-      const yOffset = -80; // Offset to account for the fixed header
+      const yOffset = isMobile ? -60 : -80; // Smaller offset for mobile
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
+
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (!isClient) return;
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen, isClient]);
 
   return (
     <motion.header
@@ -164,10 +179,11 @@ export default function Navbar() {
             {/* Mobile Navigation Button */}
             <div className="md:hidden">
               <button
+                aria-label={isOpen ? "Close menu" : "Open menu"}
                 className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <Menu className="h-5 w-5" />
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
           </nav>
@@ -178,22 +194,14 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-14 left-0 right-0 bottom-0 bg-gray-950/98 backdrop-blur-xl z-50 overflow-auto"
+            className="fixed top-16 left-0 right-0 bg-gray-950/98 backdrop-blur-xl z-50 overflow-auto"
           >
-            <div className="p-4">
-              <div className="flex justify-end mb-4">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="flex flex-col gap-4">
+            <div className="p-4 flex flex-col h-full">
+              <div className="flex flex-col gap-4 mt-4">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
@@ -230,4 +238,4 @@ export default function Navbar() {
       </AnimatePresence>
     </motion.header>
   );
-} 
+}

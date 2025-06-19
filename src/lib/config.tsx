@@ -6,16 +6,17 @@ import { RiInstagramFill } from "react-icons/ri";
 export const BLUR_FADE_DELAY = 0.15;
 
 export const siteConfig = {
-  name: "acme.ai",
-  description: "Automate your workflow with AI",
-  url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
-  keywords: ["SaaS", "Template", "Next.js", "React", "Tailwind CSS"],
+  name: "Sumama Khan | Portfolio",
+  description: "Full Stack Developer specializing in Next.js, React, TypeScript, Python, and AI/ML integration",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://sumamakhan.vercel.app",
+  keywords: ["Sumama Khan", "Portfolio", "Full Stack Developer", "Software Engineer", "Web Developer", "Next.js", "React", "TypeScript", "JavaScript", "Python", "Golang", "AI/ML", "Prompt Engineering"],
   links: {
-    email: "support@acme.ai",
-    twitter: "https://twitter.com/magicuidesign",
+    email: "sumamakhan761@gmail.com",
+    twitter: "https://twitter.com/sumamakhan761",
     discord: "https://discord.gg/87p2vpsat5",
-    github: "https://github.com/magicuidesign/magicui",
+    github: "https://github.com/sumamakhan761",
     instagram: "https://instagram.com/magicuidesign/",
+    linkedin: "https://linkedin.com/in/sumama-khan",
   },
   header: [
     {
