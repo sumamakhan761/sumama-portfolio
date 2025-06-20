@@ -8,14 +8,12 @@ export const BLUR_FADE_DELAY = 0.15;
 export const siteConfig = {
   name: "Sumama Khan | Portfolio",
   description: "Full Stack Developer specializing in Next.js, React, TypeScript, Python, and AI/ML integration",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://sumamakhan.vercel.app",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://sumama-portfolio-gold.vercel.app/",
   keywords: ["Sumama Khan", "Portfolio", "Full Stack Developer", "Software Engineer", "Web Developer", "Next.js", "React", "TypeScript", "JavaScript", "Python", "Golang", "AI/ML", "Prompt Engineering"],
   links: {
-    email: "sumamakhan761@gmail.com",
-    twitter: "https://twitter.com/sumamakhan761",
-    discord: "https://discord.gg/87p2vpsat5",
+    email: "sumamakhan800@gmail.com",
     github: "https://github.com/sumamakhan761",
-    instagram: "https://instagram.com/magicuidesign/",
+    twitter: "https://twitter.com/sumamakhan761",
     linkedin: "https://linkedin.com/in/sumama-khan",
   },
   header: [
